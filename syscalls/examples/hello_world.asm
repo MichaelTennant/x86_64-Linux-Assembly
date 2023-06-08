@@ -49,16 +49,16 @@ section	.text													; Code section
 		push	rsi												; Push the value of %rsi onto the stack for preservation
 		push	rdx												; Push the value of %rdx onto the stack for preservation
 
-		mov		rax, 1
-		mov		rdi, 1
-		mov		rsi, MSG
-		mov		rdx, MSG_LEN
-		syscall
+		mov		rax, 1											; Move write syscall number (1) to %rax
+		mov		rdi, 1											; Set arg0 (%rdi), file descriptor, to 1 (std_out)
+		mov		rsi, MSG										; Set arg1 (%rsi), char *buffer, to MSG
+		mov		rdx, MSG_LEN									; Set arg2 (%rdx), *buffer length, to MSG_LEN
+		syscall													; Call syscall 1 (write) to print MSG to the console
 
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		pop		rax
+		pop		rdx												; Restore %rdx from stack
+		pop		rsi												; Restore %rsi from stack
+		pop		rdi												; Restore %rdi from stack
+		pop		rax												; Restore %rax from stack
 
 	%endmacro													; End the multiline macro (subroutine) definition
 
