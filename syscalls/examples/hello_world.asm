@@ -74,5 +74,5 @@ section	.text													; Code section
 
 	main:														; Define main function, start code here
 
-		print	MSG, MSG_LEN
-		exit
+		print	MSG, MSG_LEN									; Print MSG with length MSG_LEN to the console
+		exit													; Exit the program with no errors
