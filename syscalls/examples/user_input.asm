@@ -22,7 +22,7 @@
 ;
 ;
 ; ABOUT:
-; A simple hello world progam written in x86_64 assembly langauge for linux.
+; A simple user input program written in x86_64 assembly langauge for linux.
 ;
 ; COMPILE:
 ; nasm -f elf64 ./user_input.asm -o ./build/user_input.o

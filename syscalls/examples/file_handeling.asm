@@ -22,11 +22,11 @@
 ;
 ;
 ; ABOUT:
-; A simple hello world progam written in x86_64 assembly langauge for linux.
+; A simple file handeling program written in x86_64 assembly langauge for linux.
 ;
 ; COMPILE:
-; nasm -f elf64 ./hello_world.asm -o ./build/hello_world.o
-; gcc ./build/hello_world.o -o ./build/hello_world -fno-pie -no-pie
+; nasm -f elf64 ./file_handeling.asm -o ./build/file_handeling.o
+; gcc ./build/file_handeling.o -o ./build/file_handeling -fno-pie -no-pie
 ;
 
 
