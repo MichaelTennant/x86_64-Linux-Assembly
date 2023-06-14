@@ -109,6 +109,7 @@ section	.text													; Code section
 
 
 	main:														; Define main function, start code here
+
 		print	LINE_FEED, LINE_FEED_LEN						; Print newline to console
 		print	MSG0, MSG0_LEN									; Print MSG with length MSG_LEN to the console
 		input	buffer, BUFFER_SIZE								; Get user input, save to buffer address
