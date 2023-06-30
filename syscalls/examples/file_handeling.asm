@@ -23,6 +23,13 @@
 ;
 ; ABOUT:
 ; A simple file handeling program written in x86_64 assembly langauge for linux.
+; Note: If out.txt cannot currently create files, you must create out.txt first 
+;		in the same directory as the script is getting run in before you run the 
+;		script.
+;
+; TODO: Create out.txt in local dir if it does not exist (O_CREAT flag + modes)
+; TODO: Finish commenting code
+; TODO: Read from file
 ;
 ; COMPILE:
 ; nasm -f elf64 ./file_handeling.asm -o ./build/file_handeling.o
@@ -33,16 +40,31 @@
 global	main													; Make the main function global so it can be linked by gcc
 
 
+section	.bss
+
+	fd			resw	1
+
+
 section	.rodata													; Define constants
 
-	O_RDONLY	dd		00
-	O_WRONLY	dd		01
-	O_RDWR		dd		02
+	O_RDONLY:	dd		00
+	O_WRONLY:	dd		01
+	O_RDWR:		dd		02
+
+;	O_CREAT:	dd		0100
+;
+;	S_IWUSR:	dd		00200
+;	S_IRUSR:	dd		00400
+
+	FILENAME:	db		"out.txt", 0x0
+
+	MSG:		db		"Help Me", 0xa, 0x0
+	MSG_LEN:	equ		$ - MSG
 
 
 section	.text													; Code section
 	
-	%macro	open	2
+	%macro	open	2											; For when no mode argument passed
 		
 		push	rdi
 		push	rsi
@@ -55,6 +77,25 @@ section	.text													; Code section
 		pop		rsi
 		pop		rdi
 
+	%endmacro
+
+
+	%macro	open	3											; For when mode argument passed
+
+		push	rdi
+		push	rsi
+		push	rdx
+
+		mov		rax, 2
+		mov		rdi, %1
+		mov		rsi, %2
+		mov		rdx, %3
+		syscall
+
+		pop		rdx
+		pop		rsi
+		pop		rdi
+	
 	%endmacro
 
 
@@ -93,13 +134,10 @@ section	.text													; Code section
 	%macro	close	1
 		
 		push	rdi
-		push	rsi
 
 		mov		rax, 3
 		mov		rdi, %1
-		mov		rsi, %2
 
-		pop		rsi
 		pop		rdi
 
 	%endmacro
@@ -136,5 +174,8 @@ section	.text													; Code section
 
 
 	main:														; Define main function, start code here
-		
+		open	FILENAME, O_WRONLY								; Open out.txt with write only permissions -> file_descriptor
+		mov		[fd], ax										; Move file_descriptor to fd address
+		write	[fd], MSG, MSG_LEN								; Write to out.txt with MSG_LEN bytes with MSG 
+		close	[fd]											; Close out.txt, saving changes
 		exit													; Exit the program with no errors

@@ -59,4 +59,30 @@ since this is a superset.*
 **O_NOCTTY** = 0400  
 *Do not assign controlling terminal.*  
 **O_TRUNC** = 01000  
-*Truncate flag.*  
+*Truncate flag.*
+
+#### Symbolic Constant Modes
+**S_IRWXU** = 00700
+*User (file owner) has read, write, and execute permission.*
+**S_IRUSR** = 00400 
+*User has read permission.*
+**S_IWUSR** = 00200 
+*User has write permission.*
+**S_IXUSR** = 00100 
+*User has execute permission.*
+**S_IRWXG** = 00070 
+*Group has read, write, and execute permission.*
+**S_IRGRP** = 00040 
+*Group has read permission.*
+**S_IWGRP** = 00020 
+*Group has write permission.*
+**S_IXGRP** = 00010 
+*Group has execute permission.*
+**S_IRWXO** = 00007 
+*Others have read, write, and execute permission.*
+**S_IROTH** = 00004 
+*Others have read permission.*
+**S_IWOTH** = 00002 
+*Others have write permission.*
+**S_IXOTH** = 00001 
+*Others have execute permission.*
